@@ -21,6 +21,7 @@ public class HealthController : MonoBehaviour
     public void TakeDamage()
 	{
 		hitPoints--;
+        if (hitPoints < 0) hitPoints = 0;
         healthText.text = "Health: " + hitPoints;
 		Debug.Log("Player hit! " + hitPoints + " HP left");
 		if (hitPoints == 0)
