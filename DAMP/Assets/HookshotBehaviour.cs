@@ -33,7 +33,7 @@ public class HookshotBehaviour : MonoBehaviour
 				gameObject.transform.position = player.transform.position + (Vector3)direction;
 				if (Input.anyKeyDown)
 				{
-					state = HookState.Shooting;
+					state = HookState.Shooting;					
 				}
 				break;
 			case HookState.Shooting:
@@ -51,6 +51,7 @@ public class HookshotBehaviour : MonoBehaviour
 					direction.Set(OrbitRadius*Mathf.Cos(OrbitSpeed*Time.time), OrbitRadius*Mathf.Sin(OrbitSpeed*Time.time));
 					state = HookState.Idle;
 					transform.SetPositionAndRotation(player.transform.position + (Vector3)direction*OrbitRadius, Quaternion.identity);
+					player.GetComponent<DamageEnemies>().TurnDamageOff();
 				}
 				break;
 		}
@@ -62,6 +63,7 @@ public class HookshotBehaviour : MonoBehaviour
 		if (state == HookState.Shooting)
 		{
 			state = HookState.Pulling;
+			player.GetComponent<DamageEnemies>().TurnDamageOn();
 		}
 	}
 }

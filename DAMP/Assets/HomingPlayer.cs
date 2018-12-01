@@ -41,7 +41,7 @@ public class HomingPlayer : MonoBehaviour {
         }        
     }
 
-    void Explode()
+    public void Explode()
     {
         Instantiate(explosionEffect, transform.position, transform.rotation);
 
