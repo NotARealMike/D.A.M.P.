@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ScoreTracker : MonoBehaviour {
 
-    int score = 0;
+    public int score = 0;
     TextMeshProUGUI scoreText;
 
 

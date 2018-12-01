@@ -11,6 +11,7 @@ public class HealthController : MonoBehaviour
 	public GameObject explosionEffect;
 	public GameObject hook;
     public TextMeshProUGUI healthText;
+    public ScoreTracker scoreTracker;
 
     private void Start()
     {
@@ -25,9 +26,9 @@ public class HealthController : MonoBehaviour
 		if (hitPoints == 0)
 		{
 			Instantiate(explosionEffect, transform.position, transform.rotation);
-            //Destroy(gameObject);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			Destroy(hook);
+            PlayerPrefs.SetInt("Score", scoreTracker.score);
             StartCoroutine(EndGame());
 		}
 	}
