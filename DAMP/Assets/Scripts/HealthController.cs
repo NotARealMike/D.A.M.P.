@@ -12,17 +12,25 @@ public class HealthController : MonoBehaviour
 	public GameObject hook;
     public TextMeshProUGUI healthText;
     public ScoreTracker scoreTracker;
+	public GameObject redOverlay;
+	public float flashDuration = 0.05f;
+	
+	private float flashStartTime;
 
     private void Start()
     {
         healthText.text = "Health: " + hitPoints;
     }
 
-    public void TakeDamage()
+	public void TakeDamage()
 	{
 		hitPoints--;
         healthText.text = "Health: " + hitPoints;
 		Debug.Log("Player hit! " + hitPoints + " HP left");
+		Color c = redOverlay.GetComponent<SpriteRenderer>().color;
+		c.a = 0.7f;
+		redOverlay.GetComponent<SpriteRenderer>().color = c;
+		flashStartTime = Time.time;
 		if (hitPoints == 0)
 		{
 			Instantiate(explosionEffect, transform.position, transform.rotation);
@@ -33,7 +41,17 @@ public class HealthController : MonoBehaviour
 		}
 	}
 
-    IEnumerator EndGame() {
+	public void Update()
+	{
+		if (Time.time > flashStartTime + flashDuration)
+		{
+			Color c = redOverlay.GetComponent<SpriteRenderer>().color;
+			c.a = 0;
+			redOverlay.GetComponent<SpriteRenderer>().color = c;			
+		}
+	}
+
+	IEnumerator EndGame() {
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
