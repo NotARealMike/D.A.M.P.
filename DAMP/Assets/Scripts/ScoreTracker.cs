@@ -15,7 +15,7 @@ public class ScoreTracker : MonoBehaviour {
         scoreText.text = "Score: " + score;
 	}
 	
-    void Increment() {
+    public void Increment() {
         score++;
         scoreText.text = "Score: " + score;
     }
