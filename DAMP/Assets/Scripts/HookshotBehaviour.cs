@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class HookshotBehaviour : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class HookshotBehaviour : MonoBehaviour
 	public float OrbitRadius;
 	public float OrbitSpeed;
 	public float MaxRadius = 30;
+	public float AutoaimDegrees = 1800;
 	
 	
 	void Update ()
@@ -33,6 +35,7 @@ public class HookshotBehaviour : MonoBehaviour
 				gameObject.transform.position = player.transform.position + (Vector3)direction;
 				if (Input.anyKeyDown)
 				{
+					autoaimDirection();
 					state = HookState.Shooting;					
 				}
 				break;
@@ -57,9 +60,31 @@ public class HookshotBehaviour : MonoBehaviour
 		}
 	}
 
+	private void autoaimDirection()
+	{
+		float closestDist2 = float.PositiveInfinity;
+		Collider2D match = null;
+		foreach (var col in Physics2D.OverlapCircleAll(transform.position, MaxRadius))
+		{
+			Vector2 relPos = col.transform.position - transform.position;
+			if (Vector2.Angle(direction, relPos) <= AutoaimDegrees / 2
+			    && relPos.sqrMagnitude < closestDist2
+			    && (col.gameObject.layer == LayerMask.NameToLayer("Enemy") 
+			        || col.gameObject.layer == LayerMask.NameToLayer("Obstacle")))
+			{
+				closestDist2 = relPos.sqrMagnitude;
+				match = col;
+			}
+		}
+
+		if (match != null)
+		{
+			direction = (match.transform.position-transform.position).normalized;
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		Debug.Log("Hook hit");
 		if (state == HookState.Shooting)
 		{
 			state = HookState.Pulling;
