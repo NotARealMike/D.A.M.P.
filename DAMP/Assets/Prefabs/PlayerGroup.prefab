@@ -48,7 +48,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1621752399080168
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
@@ -157,7 +157,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4985424795859574
 Transform:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621752399080168}
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_ComponentOwner: {fileID: 4985424795859574}
 --- !u!114 &114141906543550566
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621752399080168}
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &114186749915605140
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621752399080168}
@@ -361,6 +361,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba080796fe5bb642b672c0fc534d52e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPoints: 10
+  explosionEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 2}
+  hook: {fileID: 1018798947306194}
 --- !u!114 &114942104211129902
 MonoBehaviour:
   m_ObjectHideFlags: 1
