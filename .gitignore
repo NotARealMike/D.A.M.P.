@@ -44,3 +44,6 @@ Thumbs.db
 # Editor version
 ###
 DAMP/ProjectSettings/ProjectVersion.txt
+
+# VS
+DAMP/.vs
