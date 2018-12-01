@@ -9,13 +9,12 @@ public class HomingPlayer : MonoBehaviour {
     private Rigidbody2D rb;
     public float speed = 5f;
     public float rotateSpeed = 200f;
-    //public float thrust = 10f;
     public GameObject explosionEffect;
-
+   
 
     // Use this for initialization
     void Start () {
-        //target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
 
 
@@ -33,8 +32,18 @@ public class HomingPlayer : MonoBehaviour {
         rb.velocity = transform.up * speed;
 	}
 
-   void OnTriggerEnter2D(){
+    void OnCollisionEnter2D(Collision2D c)
+    {
+        if (c.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Explode();    
+        }        
+    }
+
+    void Explode()
+    {
         Instantiate(explosionEffect, transform.position, transform.rotation);
+
         Destroy(gameObject);
     }
 }

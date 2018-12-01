@@ -21,6 +21,7 @@ public class HookshotBehaviour : MonoBehaviour
 	public float Force;
 	public float OrbitRadius;
 	public float OrbitSpeed;
+	public float MaxRadius = 30;
 	
 	
 	void Update ()
@@ -37,7 +38,7 @@ public class HookshotBehaviour : MonoBehaviour
 				break;
 			case HookState.Shooting:
 				gameObject.transform.Translate(Time.deltaTime*direction*Speed);
-				if ((player.transform.position - transform.position).sqrMagnitude > 100)
+				if ((player.transform.position - transform.position).sqrMagnitude > MaxRadius*MaxRadius)
 				{
 					state = HookState.Idle;
 					transform.SetPositionAndRotation(player.transform.position + (Vector3)direction, Quaternion.identity);
