@@ -36,6 +36,7 @@ public class HomingPlayer : MonoBehaviour {
     {
         if (c.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            c.gameObject.GetComponent<HealthController>().TakeDamage();
             Explode();    
         }        
     }
