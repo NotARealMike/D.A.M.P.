@@ -1070,10 +1070,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1419233302}
-  Speed: 10
+  Speed: 30
   Force: 200
   OrbitRadius: 1.5
   OrbitSpeed: 5
+  MaxRadius: 30
 --- !u!58 &1599778090
 CircleCollider2D:
   m_ObjectHideFlags: 0
