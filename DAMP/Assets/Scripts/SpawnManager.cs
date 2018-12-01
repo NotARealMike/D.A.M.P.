@@ -6,8 +6,9 @@ public class SpawnManager : MonoBehaviour
 {
 
     public GameObject enemy;                // The enemy prefab to be spawned.
-    public float spawnInterval = 4f;            // How long between each spawn.
-    public float spawnAcceleration = 5e-2f;
+    public float spawnInterval = 5f;            // How long between each spawn.
+    public float spawnAcceleration = 5e-3f;     // By how much per second the interval decreases
+    public float minSpawnInterval = 0.2f;
     public static int side = 120;
     public int distance = 5;
     private Rect border = new Rect(-side / 2, -side / 2, side, side);
@@ -25,7 +26,8 @@ public class SpawnManager : MonoBehaviour
         float timeSinceSpawn = Time.time - lastSpawnTime;
         if (timeSinceSpawn >= spawnInterval)
         {
-            spawnInterval -= spawnAcceleration * timeSinceSpawn;
+            if(spawnInterval > minSpawnInterval)
+                spawnInterval -= spawnAcceleration * timeSinceSpawn;
             lastSpawnTime = Time.time;
             Spawn();
         }
