@@ -24,6 +24,9 @@ public class HookshotBehaviour : MonoBehaviour
 	public float OrbitSpeed;
 	public float MaxRadius = 30;
 	public float AutoaimDegrees = 1800;
+	public float PullTimeout = 1;
+
+	private float pullStartTime;
 	
 	
 	void Update ()
@@ -49,7 +52,8 @@ public class HookshotBehaviour : MonoBehaviour
 				break;
 			case HookState.Pulling:
 				player.GetComponent<Rigidbody2D>().AddForceAtPosition(direction*Force, Vector2.zero);
-				if ((player.transform.position - gameObject.transform.position).sqrMagnitude < 10)
+				if ((player.transform.position - gameObject.transform.position).sqrMagnitude < 10
+				    || Time.time > pullStartTime + PullTimeout)
 				{
 					direction.Set(OrbitRadius*Mathf.Cos(OrbitSpeed*Time.time), OrbitRadius*Mathf.Sin(OrbitSpeed*Time.time));
 					state = HookState.Idle;
@@ -88,6 +92,7 @@ public class HookshotBehaviour : MonoBehaviour
 		if (state == HookState.Shooting)
 		{
 			state = HookState.Pulling;
+			pullStartTime = Time.time;
 			player.GetComponent<DamageEnemies>().TurnDamageOn();
 		}
 	}
