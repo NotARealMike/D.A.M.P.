@@ -32,9 +32,12 @@ public class HomingPlayer : MonoBehaviour {
         rb.velocity = transform.up * speed;
 	}
 
-    void OnTriggerEnter2D()
+    void OnCollisionEnter2D(Collision2D c)
     {
-        Explode();
+        if (c.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Explode();    
+        }        
     }
 
     void Explode()
